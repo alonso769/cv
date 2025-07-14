@@ -475,37 +475,100 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    /* On larger screens, hide the short name and show the full name */
-    .full-name {
-      display: inline; /* Or block */
-    }
-    .short-name {
-      display: none;
-    }
+  /* Hide the full name by default and show the short name */
+.full-name {
+  display: none;
+}
+.short-name {
+  display: inline; /* Ensure it's inline to allow wrapping if space is tight */
+  /* Added specific font size for short name on small screens for better fit */
+  font-size: 1.8rem; /* Adjusted from 2.25rem (text-4xl) to make it smaller on mobile */
+  white-space: nowrap; /* Keep it on one line if possible */
+  overflow: hidden; /* Hide overflow if it's still too long */
+  text-overflow: ellipsis; /* Add ellipsis if text is cut off */
+  max-width: 100%; /* Ensure it respects container width */
+  display: block; /* Change to block to ensure max-width applies and it takes its own line */
+}
+
+
+@media (max-width: 767px) { /* Applies only to screens up to 767px wide (typical mobile) */
+  .typewriter h1 {
+    /* Override typewriter animation for short name to prevent cutting off mid-animation */
+    white-space: nowrap; /* Ensure it stays on one line */
+    overflow: hidden; /* Hide anything that overflows */
+    text-overflow: ellipsis; /* Add "..." if content is clipped */
+    animation: none; /* Disable typing animation on mobile for the short name */
+    border-right: none; /* Remove cursor on mobile for the short name */
   }
-  @media (min-width: 1024px) {
-    .lg\:grid-cols-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+
+  .short-name {
+    font-size: 1.8rem; /* Adjust this value as needed to fit "Alonso Sixto Sil" */
+    line-height: 1.2; /* Adjust line height if necessary */
+    display: block; /* Ensure it behaves as a block to respect width limits */
   }
+
+  /* Ensure the full name is always hidden on small screens */
+  .full-name {
+    display: none !important; /* Use !important to override potential inherited styles */
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* On larger screens, hide the short name and show the full name */
+  .full-name {
+    display: inline; /* Or block, depending on your desired layout */
+  }
+  .short-name {
+    display: none;
+  }
+
+  /* Re-enable typewriter animation for the full name on larger screens */
+  .typewriter h1 {
+    animation:
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+    border-right: .15em solid #FFD700;
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
-  <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg p-8 text-center relative overflow-hidden">
-    <div class="absolute inset-0 bg-pattern opacity-10"></div>
-    <div class="relative z-10 typewriter">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-2">
-        <span class="full-name">Alonso Sixto Silva Vidal</span>
-        <span class="short-name">Alonso Sixto Sil</span>
-      </h1>
-      <p class="text-lg md:text-xl font-light">Ingeniero de Sistemas en Formación | Analista Programador | Especialista en Ciberseguridad</p>
-      <p class="mt-4 text-blue-200 text-base md:text-lg">
-        <a href="mailto:salonsosixto@gmail.com" class="hover:underline transition duration-300">salonsosixto@gmail.com</a> |
-        <a href="https://wa.me/51997310228" target="_blank" class="hover:underline transition duration-300">Contacto: +51 997310228</a>
-      </p>
-    </div>
-  </header>
+<header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg p-8 text-center relative overflow-hidden">
+  <div class="absolute inset-0 bg-pattern opacity-10"></div>
+  <div class="relative z-10 typewriter">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-2">
+      <span class="full-name">Alonso Sixto Silva Vidal</span>
+      <span class="short-name">Alonso Sixto Sil</span>
+    </h1>
+    <p class="text-lg md:text-xl font-light">Ingeniero de Sistemas en Formación | Analista Programador | Especialista en Ciberseguridad</p>
+    <p class="mt-4 text-blue-200 text-base md:text-lg">
+      <a href="mailto:salonsosixto@gmail.com" class="hover:underline transition duration-300">salonsosixto@gmail.com</a> |
+      <a href="https://wa.me/51997310228" target="_blank" class="hover:underline transition duration-300">Contacto: +51 997310228</a>
+    </p>
+  </div>
+</header>
 
   <!-- Perfil -->
   <section id="profile" class="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-xl rounded-lg fade-in-section">
